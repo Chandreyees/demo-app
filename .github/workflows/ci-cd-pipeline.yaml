@@ -57,6 +57,7 @@ jobs:
       - name: 📦 Build Docker Image
         run: |
           docker build -t chandreyees20/demo-api:latest .
+          docker tag chandreyees20/demo-api:latest chandreyees20/demo-api:${{ github.sha }}
 
       - name: 🚀 Push Docker Image
         run: |
