@@ -63,25 +63,3 @@ jobs:
         run: |
           docker push chandreyees20/demo-api:latest
           docker push chandreyees20/demo-api:${{ github.sha }}
-
-  deploy-to-k8s:
-    name: 🚀 Deploy to Kubernetes
-    needs: docker-build-push
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 🔄 Checkout Code
-        uses: actions/checkout@v3
-
-      - name: ⚙ Configure kubectl
-        run: |
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > kubeconfig.yaml
-          export KUBECONFIG=kubeconfig.yaml
-
-      - name: 🚀 Apply Kubernetes Manifests
-        run: |
-          kubectl apply -f k8s/postgres.yaml
-          kubectl apply -f k8s/deployment.yaml
-
-      - name: ✅ Verify Deployment
-        run: kubectl get pods
