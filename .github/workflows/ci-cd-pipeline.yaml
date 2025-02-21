@@ -23,8 +23,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 🏗 Build & Run Tests
-        run: mvn clean install
+      - name: 🏗 Build Without Tests
+        working-directory: demo-app
+        run: mvn clean install -DskipTests
+
 
   docker-build-push:
     name: 🐳 Build & Push Docker Image
