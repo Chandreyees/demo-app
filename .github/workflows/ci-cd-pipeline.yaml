@@ -24,7 +24,6 @@ jobs:
           java-version: '17'
 
       - name: 🏗 Build Without Tests
-        working-directory: demo-app
         run: mvn clean install -DskipTests
 
 
