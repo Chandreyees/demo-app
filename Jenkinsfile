@@ -28,5 +28,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    bat 'kubectl apply -f k8s/postgres.yaml'
+                    bat 'kubectl apply -f k8s/deployment.yaml'
+                }
+            }
+        }
     }
 }
